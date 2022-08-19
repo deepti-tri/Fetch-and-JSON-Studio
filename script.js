@@ -1,10 +1,11 @@
 window.addEventListener("load", function() {
-    let json = []; let count = 0;
+    let json = []; 
     fetch("https://handlers.education.launchcode.org/static/astronauts.json").then(function(response) {
         response.json().then(function(json) {
+            
             const container = document.getElementById("container");
             json.sort((a,b) => b.hoursInSpace - a.hoursInSpace);
-            
+            container.innerHTML = `<h3>Number of Astronauts = ${json.length}</h3>`
             for (let i = 0; i < json.length; i++) {
                 container.innerHTML += `
                 <div>
@@ -13,7 +14,7 @@ window.addEventListener("load", function() {
                     <h3>${json[i].firstName} ${json[i].lastName}</h3>
                     <ul>
                         <li>Hours in Space: ${json[i].hoursInSpace}</li>
-                        <li id="change">Active: ${json[i].active}</li>
+                        <li class="${json[i].active}">Active: ${json[i].active}</li>
                         <li>Skills: ${json[i].skills}</li>
                     </ul>
                     </div>
@@ -21,17 +22,18 @@ window.addEventListener("load", function() {
                     </div>
                 </div>
                 `;
-                if (json[i].active === "true") {
-                    container.getElementById("change").style.color = "green";
-                }
-                count++;
+                
+                
+                
             }
-            
+        
 
 
 
         });
-        console.log(`Total number of astronauts: ${count-1}`);
+
+        
     });
+    
     
 });
